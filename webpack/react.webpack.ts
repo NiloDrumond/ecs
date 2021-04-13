@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import * as path from "path";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -7,8 +8,19 @@ const config = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     mainFields: ["main", "module", "browser"],
+    alias: {
+      "@": path.resolve(rootPath, "app/src"),
+      "@ecs": path.resolve(rootPath, "app/src/modules/ecs"),
+      "@shared": path.resolve(rootPath, "app/src/modules/shared"),
+      "@render": path.resolve(rootPath, "app/src/modules/render"),
+      "@services": path.resolve(rootPath, "app/src/services"),
+      "@utils": path.resolve(rootPath, "app/src/utils"),
+      "@scenes": path.resolve(rootPath, "app/src/scenes"),
+      "@hooks": path.resolve(rootPath, "app/src/hooks"),
+      "@components": path.resolve(rootPath, "app/src/components"),
+    },
   },
-  entry: path.resolve(rootPath, "src/renderer", "index.tsx"),
+  entry: path.resolve(rootPath, "app/src", "index.tsx"),
   target: "electron-renderer",
   devtool: "source-map",
   module: {
@@ -18,6 +30,7 @@ const config = {
         exclude: /node_modules/,
         use: {
           loader: "ts-loader",
+          options: { onlyCompileBundledFiles: true },
         },
       },
       {

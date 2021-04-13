@@ -1,6 +1,11 @@
 import { app, BrowserWindow } from "electron";
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+} from "electron-devtools-installer";
 import * as path from "path";
 import * as url from "url";
+
+const isDev = process.env.NODE_ENV === "development";
 
 let mainWindow: Electron.BrowserWindow | null;
 
@@ -12,11 +17,11 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      devTools: process.env.NODE_ENV !== "production",
+      devTools: isDev,
     },
   });
 
-  if (process.env.NODE_ENV === "development") {
+  if (isDev) {
     mainWindow.loadURL("http://localhost:4000");
   } else {
     mainWindow.loadURL(
@@ -26,6 +31,18 @@ function createWindow() {
         slashes: true,
       })
     );
+  }
+
+  if (isDev) {
+    mainWindow.webContents.once("dom-ready", async () => {
+      await installExtension([REACT_DEVELOPER_TOOLS])
+        .then((name: string) => console.log(`Added Extension:  ${name}`))
+        .catch((err: string) => console.log("An error occurred: ", err))
+        .finally(() => {
+          require("electron-debug")(); // https://github.com/sindresorhus/electron-debug
+          mainWindow?.webContents?.openDevTools();
+        });
+    });
   }
 
   mainWindow.on("closed", () => {

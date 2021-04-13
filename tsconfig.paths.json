@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "rootDir": "./app",
+    "baseUrl": "./app/src",
+    "paths": {
+      "@/*": ["./*"],
+      "@render/*": ["./modules/render/*"],
+      "@assets/*": ["./assets/*"],
+      "@shared/*": ["./modules/shared/*"],
+      "@ecs/*": ["./modules/ecs/*"],
+      "@components/*": ["./components/*"],
+      "@utils/*": ["./utils/*"],
+      "@hooks/*": ["./hooks/*"],
+      "*": ["types/*.d.ts"]
+    }
+  }
+}

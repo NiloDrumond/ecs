@@ -1,4 +1,6 @@
 {
+  "extends": "./tsconfig.paths.json",
+  "include": ["app/src", "app/src/@types"],
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",
@@ -11,6 +13,7 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
+    "strictPropertyInitialization": false,
     "strictNullChecks": true
   }
 }
