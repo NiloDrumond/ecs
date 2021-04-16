@@ -1,17 +1,16 @@
 import { IComponentConfig, World } from 'ape-ecs';
 // import { Component } from '../interfaces';
 import { VAnt } from '@render/mesh/meshes';
-import { srandom } from '@utils/math';
-import { IPosition, IMesh } from '../interfaces/components';
+import { IPosition, IMesh, IMovement } from '../interfaces/components';
 
 let antId = 0;
 
 function createAntComponents(): IComponentConfig[] {
   const position: Component<IPosition> = {
     type: 'CPosition',
-    x: srandom() * 200,
-    y: srandom() * 200,
-    angle: srandom() * Math.PI,
+    x: Math.random() * 200,
+    y: Math.random() * 200,
+    angle: Math.random() * Math.PI,
   };
 
   const mesh: Component<IMesh> = {
@@ -21,15 +20,26 @@ function createAntComponents(): IComponentConfig[] {
     generated: false,
   };
 
-  return [position, mesh];
+  const movement: Component<IMovement> = {
+    type: 'CMovement',
+    angularAcceleration: Math.random(),
+    angularMaxSpeed: 0,
+    angularSpeed: 0,
+    linearAcceleration: Math.random() / 10,
+    linearMaxSpeed: 10,
+    linearSpeed: 0,
+  };
+
+  return [position, mesh, movement];
 }
 
 export function spawnAnt(world: World): void {
   const antComponents = createAntComponents();
-  let a;
+
   const e = world.createEntity({
     id: `ant-${++antId}`,
     tags: ['Agent', 'Ant'],
     components: antComponents,
   });
+  console.log(e);
 }

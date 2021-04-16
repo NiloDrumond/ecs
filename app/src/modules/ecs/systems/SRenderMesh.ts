@@ -18,7 +18,6 @@ export default class RenderMeshSystem extends APE.System {
     for (const entity of entities) {
       const mesh = entity.getOne(CMesh);
       const pos = entity.getOne(CPosition);
-
       if (!mesh || !pos) return;
 
       if (mesh.generated) {

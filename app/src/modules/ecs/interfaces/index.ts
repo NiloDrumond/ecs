@@ -8,3 +8,7 @@ export enum SystemGroup {
   Render = 'Render',
   Input = 'Input',
 }
+
+export enum GlobalEntity {
+  Game = 'Game',
+}

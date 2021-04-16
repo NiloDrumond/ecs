@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import Test from "./scenes/test";
+import './styles/global.css';
+import Test from './scenes/test';
 
 const App: React.FC = () => {
   return <Test />;

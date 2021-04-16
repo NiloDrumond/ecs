@@ -1,1 +1,1 @@
-export const VAnt = [-10, 0, 10, 0, 0, -24];
+export const VAnt = [-10, -10, -10, 10, 24, 0];

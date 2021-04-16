@@ -10,6 +10,7 @@ import {
 import { getMassCenter } from '@utils/math';
 import app from '@render/app';
 import { hexToRGB } from '@utils/parsers';
+import getRandomColor from '@/utils/render/getRandomColor';
 import { basicShader } from './shaders';
 
 const positionSize = 3;
@@ -52,9 +53,10 @@ class MeshManager {
       true,
     );
 
-    const antColor = hexToRGB('#364f6b', 1);
+    // const antColor = hexToRGB('#364f6b', 1);
 
     for (let i = 0; i < geometry.instanceCount; i++) {
+      const antColor = getRandomColor();
       const instanceOffset = i * (positionSize + colorSize);
 
       buffer.data[instanceOffset + 0] = positions[i].x;
